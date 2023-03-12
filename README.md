@@ -2,4 +2,4 @@
 
 expo로 만드는 react-native-app
 
-OpenweathAPI 사용
+OpenWeatherAPI 사용
