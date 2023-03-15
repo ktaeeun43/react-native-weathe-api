@@ -10,6 +10,7 @@ import {
 import React, { useEffect, useState } from "react";
 import Constants from "expo-constants";
 import * as Location from "expo-location";
+import WeatherInfo from "./WeatherInfo";
 
 const openWeatherKey = "2f32d23d8511e33f61cc337baaebec19";
 const url = `http://api.openweathermap.org/data/2.5/weather?q=seoul&appid=${openWeatherKey}`;
@@ -57,6 +58,7 @@ const Weather = () => {
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Weather</Text>
       </View>
+      <WeatherInfo weatherData={weatherData} />
     </View>
   );
 };
