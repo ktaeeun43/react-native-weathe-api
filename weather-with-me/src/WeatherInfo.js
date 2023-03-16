@@ -10,9 +10,8 @@ import {
 } from "react-native";
 import React, { useEffect } from "react";
 import CelsiusIcon from "../assets/celsius.svg";
-
+import WeatherIcon from "./components/WeatherIcon";
 const WeatherInfo = (weatherData) => {
-  console.log(weatherData, "정보");
   const {
     weatherData: {
       coord: { lon = 0, lat = 0 } = {},
@@ -131,22 +130,9 @@ const WeatherInfo = (weatherData) => {
             {getKoreanDescription(description)}
           </Text>
         </View>
-        <View style={styles.current}>
-          <Image
-            style={styles.largeIcon}
-            source={{
-              uri: `http://openweathermap.org/img/wn/${icon}@4x.png`,
-            }}
-          />
-          <Text style={styles.currentTemp}>{tempC}</Text>
-          <CelsiusIcon width={100} height={100}></CelsiusIcon>
-        </View>
-        <Text style={styles.currentDescription}></Text>
         <View style={styles.extraInfo}>
+          <WeatherIcon description={description} />
           <View style={styles.info}>
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              체감온도{" "}
-            </Text>
             <Image
               source={require("../assets/temp.png")}
               style={{
@@ -156,9 +142,12 @@ const WeatherInfo = (weatherData) => {
                 marginLeft: 50,
               }}
             />
-            <Text style={{ fontSize: 20, color: "white", textAlign: "center" }}>
-              {feelsLikeC} <CelsiusIcon width={100} height={100}></CelsiusIcon>
-            </Text>
+            <View style={styles.tempGroup}>
+              <View>
+                <Text style={styles.currentTemp}>{tempC}</Text>
+              </View>
+              <CelsiusIcon width={70} height={70}></CelsiusIcon>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -189,7 +178,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   info: {
-    width: Dimensions.get("screen").width / 2.5,
+    width: Dimensions.get("screen").width / 3.5,
     backgroundColor: "rgba(0,0,0, 0.5)",
     padding: 10,
     borderRadius: 15,
@@ -204,8 +193,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
   },
+  tempGroup: {
+    flexDirection: "row",
+  },
   currentTemp: {
-    fontSize: 32,
+    fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
   },
