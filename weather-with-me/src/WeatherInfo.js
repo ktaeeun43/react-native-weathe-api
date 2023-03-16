@@ -9,7 +9,7 @@ import {
   SafeAreaView,
 } from "react-native";
 import React, { useEffect } from "react";
-import CelsiusIcon from "../assets/celsius.svg";
+import CelsiusIcon from "../assets/Crop_celsius.svg";
 import WeatherIcon from "./components/WeatherIcon";
 const WeatherInfo = (weatherData) => {
   const {
@@ -31,7 +31,7 @@ const WeatherInfo = (weatherData) => {
       visibility = "",
     },
   } = weatherData;
-
+  console.log(weatherData, "날씨");
   const getKoreanDescription = (description) => {
     switch (description) {
       case "clear sky":
@@ -122,31 +122,56 @@ const WeatherInfo = (weatherData) => {
             display: "flex",
             flexDirection: "row",
             justifyContent: "center",
-            width: 250,
+            width: Dimensions.get("screen").width,
           }}
         >
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.currentDescription}>
-            {getKoreanDescription(description)}
-          </Text>
+          <View
+            style={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              width: Dimensions.get("screen").width / 1.5,
+            }}
+          >
+            <Text style={styles.title}>{name}</Text>
+            <Text style={styles.currentDescription}>
+              {getKoreanDescription(description)}
+            </Text>
+          </View>
+          <View>
+            <Text style={styles.humidity}>습도 {humidity}%</Text>
+          </View>
         </View>
         <View style={styles.extraInfo}>
           <WeatherIcon description={description} />
           <View style={styles.info}>
-            <Image
-              source={require("../assets/temp.png")}
-              style={{
-                width: 40,
-                height: 40,
-                borderRadius: 40 / 2,
-                marginLeft: 50,
-              }}
-            />
-            <View style={styles.tempGroup}>
-              <View>
-                <Text style={styles.currentTemp}>{tempC}</Text>
+            <View>
+              <Text style={styles.currentTemp}>현재온도</Text>
+              <Image
+                source={require("../assets/temp.png")}
+                style={{
+                  width: 40,
+                  height: 40,
+                  borderRadius: 40 / 2,
+                  marginLeft: 20,
+                }}
+              />
+            </View>
+            <View style={styles.tempWrapGroup}>
+              <View style={styles.tempGroup}>
+                <Text style={styles.currentTemp}>{tempC}°C</Text>
               </View>
-              <CelsiusIcon width={70} height={70}></CelsiusIcon>
+              <View style={styles.tempGroup}>
+                <View style={{ paddingRight: 10 }}>
+                  <Text style={styles.currentMaxTemp}>최고</Text>
+                  <Text style={styles.currentMaxTemp}>{tempMaxC}°C</Text>
+                </View>
+                <View>
+                  <Text style={styles.currentMaxTemp}>최저</Text>
+                  <Text style={styles.currentMaxTemp}>{tempMinC}°C</Text>
+                </View>
+              </View>
             </View>
           </View>
         </View>
@@ -195,24 +220,42 @@ const styles = StyleSheet.create({
   },
   tempGroup: {
     flexDirection: "row",
+    alignItems: "center",
+    alignContent: "center",
+    padding: 10,
+  },
+  tempWrapGroup: {
+    flexDirection: "column",
+    alignItems: "center",
+    alignContent: "center",
   },
   currentTemp: {
+    fontSize: 24,
+    fontWeight: "bold",
+    textAlign: "center",
+    color: "#374151",
+  },
+  currentMaxTemp: {
     fontSize: 18,
     fontWeight: "bold",
     textAlign: "center",
+    color: "#374151",
   },
   currentDescription: {
     textAlign: "center",
-    fontSize: 24,
+    fontSize: 30,
     fontWeight: "bold",
-    marginBottom: 10,
   },
   title: {
     textAlign: "center",
     fontSize: 36,
     fontWeight: "bold",
     color: "#e96e50",
-    paddingLeft: 100,
-    paddingRight: 30,
+    paddingRight: 10,
+  },
+  humidity: {
+    textAlign: "center",
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });

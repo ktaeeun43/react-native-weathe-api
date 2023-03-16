@@ -56,7 +56,7 @@ const Weather = () => {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Text style={styles.headerTitle}>Weather</Text>
+        <Text style={styles.headerTitle}>Weather with Me</Text>
       </View>
       <WeatherInfo weatherData={weatherData} />
     </View>
