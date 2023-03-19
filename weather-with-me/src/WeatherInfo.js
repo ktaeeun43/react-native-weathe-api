@@ -144,7 +144,7 @@ const WeatherInfo = (weatherData) => {
           </View>
         </View>
         <View style={styles.extraInfo}>
-          <WeatherIcon description={description} />
+          <WeatherIcon description={icon} />
           <View style={styles.info}>
             <View>
               <Text style={styles.currentTemp}>현재온도</Text>
