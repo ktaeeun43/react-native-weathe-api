@@ -175,6 +175,37 @@ const WeatherInfo = (weatherData) => {
             </View>
           </View>
         </View>
+        <View style={styles.tempWrapGroup}>
+          <View style={styles.description}>
+            <Text>
+              {" "}
+              오늘의 날씨는 {getKoreanDescription(description)}입니다. 풍속은{" "}
+              {speed}m/s로 예상되고
+            </Text>
+            <Text>습도는{humidity}%입니다</Text>
+          </View>
+        </View>
+        <View
+          style={{
+            alignItems: "center",
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "center",
+            width: Dimensions.get("screen").width,
+          }}
+        >
+          <View
+            style={{
+              alignItems: "center",
+              display: "flex",
+              flexDirection: "row",
+              justifyContent: "center",
+              width: Dimensions.get("screen").width * 0.8,
+            }}
+          >
+            <Text style={styles.playlist}>오늘의 추천 PlayList 입니다.</Text>
+          </View>
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
@@ -209,6 +240,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: "center",
   },
+  description: {
+    width: Dimensions.get("screen").width * 0.9,
+    backgroundColor: "rgba(0,0,0, 0.4)",
+    padding: 10,
+    margin: 10,
+    borderRadius: 10,
+    justifyContent: "center",
+  },
   largeIcon: {
     width: 250,
     height: 200,
@@ -229,6 +268,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignContent: "center",
   },
+  descriptionGroup: {
+    flexDirection: "column",
+    alignItems: "center",
+    alignContent: "center",
+  },
   currentTemp: {
     fontSize: 24,
     fontWeight: "bold",
@@ -244,6 +288,11 @@ const styles = StyleSheet.create({
   currentDescription: {
     textAlign: "center",
     fontSize: 30,
+    fontWeight: "bold",
+  },
+  playlist: {
+    textAlign: "left",
+    fontSize: 26,
     fontWeight: "bold",
   },
   title: {
